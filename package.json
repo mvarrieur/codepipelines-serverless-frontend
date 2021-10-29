@@ -1,0 +1,12 @@
+{
+  "name": "codepipelines-serverless-frontend",
+  "version": "1.0.0",
+  "main": "dashboard.ts",
+  "repository": "https://github.com/mvarrieur/codepipelines-serverless-frontend",
+  "author": "Michael Varrieur <mike.varrieur@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "aws-sdk": "^2.1017.0"
+  }
+}

@@ -1,13 +1,33 @@
 service: codepipelines-serverless-frontend
-
 frameworkVersion: '2'
 
-
 provider:
+  lambdaHashingVersion: 20201221
   name: aws
   runtime: nodejs12.x
-  lambdaHashingVersion: 20201221
+  region: eu-central-1
+  logRetentionInDays: 7
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - codepipeline:ListPipelines
+            - codepipeline:GetPipelineState
+
+package:
+  individually: true
 
 functions:
-  hello:
-    handler: handler.hello
+  dashboardApi:
+    handler: dashboard.handler
+    package:
+      artifact: deploy/lambda.zip
+    name: dashboard-api
+    reservedConcurrency: 5
+    memorySize: 128
+    timeout: 10
+    events:
+      - httpApi:
+          path: /api/{proxy+}
+          method: GET
